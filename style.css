@@ -1,0 +1,155 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  overflow: hidden;
+}
+
+#form {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 650px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+}
+
+#form-title,
+.input-div:has(#phone),
+#form-btn {
+  grid-column: span 2;
+}
+
+#form-title {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 5px rgba(102, 126, 234, 0.2);
+}
+
+.input-div:has(#phone) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.input-div:has(#phone) label {
+  width: 100%;
+}
+
+.input-div:has(#phone) .informacion {
+  width: 100%;
+  order: 3;
+}
+
+#phone-code {
+  background: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #667eea;
+  min-width: 55px;
+  text-align: center;
+}
+
+#phone {
+  flex: 1;
+  border-radius: 0 6px 6px 0;
+}
+
+.informacion {
+  font-size: 0.7rem;
+  color: #777;
+  margin-top: 4px;
+  line-height: 1.2;
+  display: none;
+}
+
+
+
+
+
+#form-btn {
+  padding: 12px;
+  background: #764ba2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 5px;
+}
+
+#form-btn:hover:not(:disabled) {
+  background: #5a377d;
+}
+
+#form-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  #form {
+    grid-template-columns: 1fr;
+    max-height: 95vh;
+    overflow-y: auto;
+  }
+
+  #form-title,
+  .input-div,
+  #form-btn,
+  .input-div:has(#phone) {
+    grid-column: span 1;
+  }
+}
