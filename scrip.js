@@ -6,7 +6,8 @@ const REGEX_EMAIL = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 const countries = document.querySelector("#countries");
 const usernameInput = document.querySelector("#username");
 const emailInput = document.querySelector("#email");
-const phoneInput = document.querySelector("#phone-code");
+const phoneCode = document.querySelector("#phone-code");
+const phoneInput = document.querySelector('#phone');
 
 let usernameValidation = false;
 let emailValidation = false;
@@ -45,11 +46,23 @@ emailInput.addEventListener('input', event =>{
 
 countries.addEventListener('input', event =>{
     const countriSelected = [...event.target.children].find(countri => countri.selected);
-    console.log(countriSelected)
+    phoneCode.innerHTML = `+${countriSelected.value}`
 });
 
+phoneInput.addEventListener('input', event => {
+    phoneValidation = REGEX_PHONE.test(event.target.value);
+    const information = event.target.parentElement.children[3];
+    console.log(information)
 
-// phoneInput.addEventListener('input', event =>{
-//     phoneValidation = REGEX_PHONE.test(event.target.value);
-//     validation(event, phoneValidation, phoneInput);
-// })
+
+    if(phoneValidation){
+        phoneInput.classList.add('correct');
+        phoneInput.classList.remove('incorrect');
+        information.classList.remove('show-information');
+    }else{
+        phoneInput.classList.add('incorrect');
+        phoneInput.classList.remove('correct');
+        information.classList.add('show-information');
+    }
+
+})
