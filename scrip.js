@@ -91,36 +91,49 @@ phoneInput.addEventListener('input', event => {
 
 //verificacion de la contrase;a y confirmar contrase;a
 
-passwordInput.addEventListener('input', (event)=>{
-    passwordValidation = REGEX_PASSWORD.test(event.target.value);
-    validation(event, passwordValidation, passwordInput);
+
+
+const passwordsValidation = () => {
+    
+    const information = confirmPasswordInput.parentElement.children[2]; 
+    
     confirmPasswordValidation = passwordInput.value === confirmPasswordInput.value;
 
-    if(confirmPasswordValidation == true){
+    
+    if (confirmPasswordInput.value === "") {
+        confirmPasswordInput.classList.remove('correct');
+        confirmPasswordInput.classList.remove('incorrect');
+        information.classList.remove('show-information');
+    } else if (confirmPasswordValidation) {
         confirmPasswordInput.classList.add('correct');
         confirmPasswordInput.classList.remove('incorrect');
         information.classList.remove('show-information');
-    }else{
+    } else {
         confirmPasswordInput.classList.add('incorrect');
         confirmPasswordInput.classList.remove('correct');
         information.classList.add('show-information');
     }
+    
+    checkForm();
+};
+
+
+
+passwordInput.addEventListener('input', (event)=>{
+    passwordValidation = REGEX_PASSWORD.test(event.target.value);
+    validation(event, passwordValidation, passwordInput);
+   passwordsValidation();
     checkForm();
 
 });
 
-confirmPasswordInput.addEventListener("input", (event)=>{
-    const information = event.target.parentElement.children[2];
-    confirmPasswordValidation = passwordInput.value === confirmPasswordInput.value;
-
-    if(confirmPasswordValidation == true){
-        confirmPasswordInput.classList.add('correct');
-        confirmPasswordInput.classList.remove('incorrect');
-        information.classList.remove('show-information');
-    }else{
-        confirmPasswordInput.classList.add('incorrect');
-        confirmPasswordInput.classList.remove('correct');
-        information.classList.add('show-information');
-    }
+confirmPasswordInput.addEventListener("input", ()=>{
+    passwordsValidation();
     checkForm();
-})
+});
+
+ button.addEventListener('click', ()=>{ 
+
+    alert('Usuario agregado con exito')
+
+ })

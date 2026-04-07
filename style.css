@@ -6,16 +6,17 @@
   border-style: solid;
   font-family: "Segoe UI", sans-serif;
 }
-
 body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  height: 100vh;
+  min-height: 100vh; /* Cambiado de height a min-height para permitir scroll si es necesario */
   display: flex;
+  flex-direction: column; /* Esto pone el form arriba y el footer abajo */
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  overflow: hidden;
+  padding: 20px;
+  /* overflow: hidden; */ /* Es mejor quitarlo por si el contenido crece en móviles */
 }
+
 
 #form {
   background: white;
@@ -27,6 +28,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px 20px;
+
 }
 
 #form-title,
@@ -54,7 +56,25 @@ label {
   margin-bottom: 4px;
   text-transform: uppercase;
 }
+.author-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+}
 
+.author-footer a {
+    color: #3498db; /* Un azul suave para el link */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.author-footer a:hover {
+    color: #2ecc71; /* Cambia a verde al pasar el mouse */
+    text-decoration: underline;
+}
 input,
 select {
   padding: 10px;
