@@ -56,18 +56,18 @@ const validation = (event, validation, element) => {
 usernameInput.addEventListener('input', event =>{
     usernameValidation = REGEX_USERNAME.test(event.target.value);
     validation(event, usernameValidation, usernameInput);
-    
+    checkForm();
 });
 emailInput.addEventListener('input', event =>{
     emailValidation = REGEX_EMAIL.test(event.target.value);
     validation(event, emailValidation, emailInput);
-    
+    checkForm();
 })
 
 countries.addEventListener('input', event =>{
     const countriSelected = [...event.target.children].find(countri => countri.selected);
     phoneCode.innerHTML = `+${countriSelected.value}`
-
+    checkForm();
 });
 
 //verificar el numero de telefono 
@@ -86,7 +86,7 @@ phoneInput.addEventListener('input', event => {
         phoneInput.classList.remove('correct');
         information.classList.add('show-information');
     }
-
+    checkForm();
 });
 
 //verificacion de la contrase;a y confirmar contrase;a
@@ -105,6 +105,7 @@ passwordInput.addEventListener('input', (event)=>{
         confirmPasswordInput.classList.remove('correct');
         information.classList.add('show-information');
     }
+    checkForm();
 
 });
 
@@ -121,5 +122,5 @@ confirmPasswordInput.addEventListener("input", (event)=>{
         confirmPasswordInput.classList.remove('correct');
         information.classList.add('show-information');
     }
+    checkForm();
 })
-checkForm();
