@@ -8,11 +8,27 @@ const usernameInput = document.querySelector("#username");
 const emailInput = document.querySelector("#email");
 const phoneCode = document.querySelector("#phone-code");
 const phoneInput = document.querySelector('#phone');
+const passwordInput = document.querySelector('#Password');
+const confirmPasswordInput = document.querySelector('#Confirm-Password');
+const button = document.querySelector('#form-btn');
+
 
 let usernameValidation = false;
 let emailValidation = false;
 let phoneValidation = false;
+let passwordValidation = false;
+let confirmPasswordValidation = false;
 
+//esto verifica que todos los espacios del formulario esten correctos 
+const checkForm = () => {
+    if (usernameValidation && emailValidation && phoneValidation && passwordValidation && confirmPasswordValidation) {
+        button.disabled = false;
+    } else {
+        button.disabled = true;
+    }
+};
+
+//esta funcion valida cada uno de los input
 
 const validation = (event, validation, element) => {
     const information = event.target.parentElement.children[2];
@@ -30,25 +46,31 @@ const validation = (event, validation, element) => {
 }
 
 
+//operador de propagacion para convertir a un array 
 
 [...countries].forEach((countri) => {
   countri.innerHTML = countri.innerHTML.split(" (")[0];
 });
 
+//cada uno de los inputs y sus verificacion 
 usernameInput.addEventListener('input', event =>{
     usernameValidation = REGEX_USERNAME.test(event.target.value);
     validation(event, usernameValidation, usernameInput);
+    
 });
 emailInput.addEventListener('input', event =>{
     emailValidation = REGEX_EMAIL.test(event.target.value);
     validation(event, emailValidation, emailInput);
+    
 })
 
 countries.addEventListener('input', event =>{
     const countriSelected = [...event.target.children].find(countri => countri.selected);
     phoneCode.innerHTML = `+${countriSelected.value}`
+
 });
 
+//verificar el numero de telefono 
 phoneInput.addEventListener('input', event => {
     phoneValidation = REGEX_PHONE.test(event.target.value);
     const information = event.target.parentElement.children[3];
@@ -65,4 +87,39 @@ phoneInput.addEventListener('input', event => {
         information.classList.add('show-information');
     }
 
+});
+
+//verificacion de la contrase;a y confirmar contrase;a
+
+passwordInput.addEventListener('input', (event)=>{
+    passwordValidation = REGEX_PASSWORD.test(event.target.value);
+    validation(event, passwordValidation, passwordInput);
+    confirmPasswordValidation = passwordInput.value === confirmPasswordInput.value;
+
+    if(confirmPasswordValidation == true){
+        confirmPasswordInput.classList.add('correct');
+        confirmPasswordInput.classList.remove('incorrect');
+        information.classList.remove('show-information');
+    }else{
+        confirmPasswordInput.classList.add('incorrect');
+        confirmPasswordInput.classList.remove('correct');
+        information.classList.add('show-information');
+    }
+
+});
+
+confirmPasswordInput.addEventListener("input", (event)=>{
+    const information = event.target.parentElement.children[2];
+    confirmPasswordValidation = passwordInput.value === confirmPasswordInput.value;
+
+    if(confirmPasswordValidation == true){
+        confirmPasswordInput.classList.add('correct');
+        confirmPasswordInput.classList.remove('incorrect');
+        information.classList.remove('show-information');
+    }else{
+        confirmPasswordInput.classList.add('incorrect');
+        confirmPasswordInput.classList.remove('correct');
+        information.classList.add('show-information');
+    }
 })
+checkForm();
